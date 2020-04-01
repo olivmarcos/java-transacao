@@ -50,7 +50,7 @@ public class ContaDao {
 
     public Conta recover(int id) {
 
-        String sql = "SELECT * FROM TBL_CONTA WHERE cnt_codigo = ?";
+        String sql = "SELECT cnt_codigo, cnt_descricao, cnt_saldo FROM TBL_CONTA WHERE cnt_codigo = ?";
 
         try {
             PreparedStatement stp = minhaConexao.prepareStatement(sql);
@@ -59,6 +59,7 @@ public class ContaDao {
             result.next();
 
             Conta conta = new Conta();
+            conta.setCnt_codigo(result.getInt("cnt_codigo"));
             conta.setCnt_descricao(result.getString("cnt_descricao"));
             conta.setCnt_saldo(Double.parseDouble(result.getString("cnt_saldo")));
 
@@ -69,20 +70,21 @@ public class ContaDao {
         return null;
     }
 
-    public void update(Conta conta) {
-        String sql = "UPDATE TBL_CONTA SET cnt_id = ?, cnt_descricao = ?, cnt_saldo = ? WHERE cnt_id = ?";
-
+    public Boolean update(Conta conta) {
+        String sql = "UPDATE TBL_CONTA SET cnt_descricao = ?, cnt_saldo = ? WHERE cnt_codigo = ?";
         try {
+
             PreparedStatement stp = minhaConexao.prepareStatement(sql);
 
-            stp.setInt(1, conta.getCnt_codigo());
-            stp.setString(2, conta.getCnt_descricao());
-            stp.setDouble(3, conta.getCnt_saldo());
+            stp.setString(1, conta.getCnt_descricao());
+            stp.setDouble(2, conta.getCnt_saldo());
+            stp.setInt(3, conta.getCnt_codigo());
 
             stp.executeUpdate();
-
+            return true;
         } catch (SQLException err) {
             System.err.println("Erro ao atualizar o objeto: " + err.getMessage());
+            return false;
         }
     }
 

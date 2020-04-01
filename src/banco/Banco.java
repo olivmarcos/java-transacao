@@ -26,13 +26,13 @@ public class Banco {
         try {
             Conta conta = new Conta();
             conta.setCnt_descricao("Minha Conta");
-            conta.setCnt_saldo(0.0);
+            conta.setCnt_saldo(100.0);
 
             Connection conn = Conexao.getConexaoTransacional();
             ContaDao contaDao = new ContaDao(conn);
-            contaDao.insert(conta);
-//           conn.commit();
-            System.out.println(contaDao.recover(7));
+            //contaDao.insert(conta);
+            //conn.commit();
+            //System.out.println(contaDao.recover(1));
 
         } catch (Exception e) {
             System.out.println(e);

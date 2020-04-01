@@ -32,8 +32,8 @@ public class ContaCtrl {
     }
 
     public String[] recover(int id) throws SQLException {
+        
         ContaDao contaDao = new ContaDao();
-
         Conta conta = contaDao.recover(id);
 
         return conta.toVetor();

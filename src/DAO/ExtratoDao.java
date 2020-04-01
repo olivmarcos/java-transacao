@@ -7,9 +7,12 @@ package DAO;
 
 import Models.Extrato;
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+
 import Conexao.Conexao;
 import java.util.ArrayList;
 
@@ -31,15 +34,16 @@ public class ExtratoDao {
 
     public boolean insert(Extrato extrato) {
 
-        String sql = "INSERT INTO TBL_EXTRATO(ext_tipo, ext_descricao, ext_valor, ext_cod_CONTA) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO TBL_EXTRATO(ext_tipo, ext_descricao, ext_valor, ext_cod_CONTA, ext_data) VALUES (?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement pst = minhaConexao.prepareStatement(sql);
 
             pst.setString(1, extrato.getExt_tipo());
             pst.setString(2, extrato.getExt_descricao());
-            pst.setDouble(3, extrato.getExt_valor());
-            pst.setInt(4, extrato.getExt_cod_conta());
+            pst.setString(3, String.valueOf(extrato.getExt_valor()));
+            pst.setString(4, String.valueOf(extrato.getExt_cod_conta()));
+            pst.setString(5, extrato.getExt_data());
 
             pst.executeUpdate();
             return true;

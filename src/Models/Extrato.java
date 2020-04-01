@@ -5,6 +5,10 @@
  */
 package Models;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  *
  * @author marco
@@ -16,6 +20,7 @@ public class Extrato {
     private String ext_descricao;
     private Double ext_valor;
     private int ext_cod_conta;
+    private String ext_data;
 
     public int getExt_codigo() {
         return ext_codigo;
@@ -56,6 +61,17 @@ public class Extrato {
     public void setExt_cod_conta(int ext_cod_conta) {
         this.ext_cod_conta = ext_cod_conta;
     }
+
+    public String getExt_data()
+    {
+        return ext_data;
+    }
+
+    public void setExt_data(Date ext_data){
+        String data = new SimpleDateFormat("yyyy-MM-dd").format(ext_data);
+        this.ext_data = data;
+    }
+
 
     public String[] toVetor() {
         String vetor[] = new String[4];
