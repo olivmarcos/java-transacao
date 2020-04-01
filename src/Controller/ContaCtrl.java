@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.ContaDao;
+import Facade.Operations;
 import Models.Conta;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -73,5 +74,27 @@ public class ContaCtrl {
             matrizReturn[i] = listContas.get(i).toVetor();
         }
         return matrizReturn;
+    }
+
+
+    public void saque(int codigoConta, double valorSaque) throws SQLException {
+        Conta conta = new Conta();
+        conta = new ContaDao().recover(codigoConta);
+        Operations.saque(conta, valorSaque);
+    }
+
+    public void deposito(int codigoConta, double valorDeposito) throws SQLException {
+        Conta conta = new Conta();
+        conta = new ContaDao().recover(codigoConta);
+        Operations.deposito(conta, valorDeposito);
+    }
+
+    public void transferencia(int codigoContaOrigem, int codigoContaDestino, double valorTransferencia) throws SQLException {
+        Conta contaOrigem = new Conta();
+        Conta contaDestino = new Conta();
+
+        contaOrigem = new ContaDao().recover(codigoContaOrigem);
+        contaDestino = new ContaDao().recover(codigoContaDestino);
+        Operations.transferencia(contaOrigem, contaDestino, valorTransferencia);
     }
 }
