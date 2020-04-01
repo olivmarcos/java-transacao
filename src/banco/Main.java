@@ -7,7 +7,6 @@ package banco;
 
 import java.sql.SQLException;
 
-import Controller.ContaCtrl;
 import DAO.ContaDao;
 import Facade.Operations;
 import Models.Conta;
@@ -23,9 +22,11 @@ public class Main {
      */ 
     public static void main(final String[] args) throws SQLException {
 
-        Conta conta = new Conta();
+        Conta contaOrigem = new Conta();
+        contaOrigem = new ContaDao().recover(4);
 
-        conta = new ContaDao().recover(1);
+        Conta contaDestino = new Conta();
+        contaDestino = new ContaDao().recover(1);
 
       /*  ContaDao dao = new ContaDao();
 
@@ -37,7 +38,9 @@ public class Main {
             return;
         }*/
 
-        Operations.saque(conta, 100.00);
+        //Operations.deposito(conta, 100.00);
+        //Operations.saque(contaDestino, 100.00);
+        Operations.transferencia(contaOrigem, contaDestino, 500.00);
     }
 
 }

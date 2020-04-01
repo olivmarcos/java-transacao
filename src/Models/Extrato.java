@@ -68,7 +68,7 @@ public class Extrato {
     }
 
     public void setExt_data(Date ext_data){
-        String data = new SimpleDateFormat("yyyy-MM-dd").format(ext_data);
+        String data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(ext_data);
         this.ext_data = data;
     }
 
