@@ -5,10 +5,7 @@
  */
 package Controller;
 
-import DAO.ContaDao;
 import DAO.ExtratoDao;
-import Facade.Operations;
-import Models.Conta;
 import Models.Extrato;
 import java.sql.SQLException;
 import java.util.ArrayList;
