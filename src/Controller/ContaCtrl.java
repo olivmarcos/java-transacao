@@ -97,4 +97,10 @@ public class ContaCtrl {
         contaDestino = new ContaDao().recover(codigoContaDestino);
         Operations.transferencia(contaOrigem, contaDestino, valorTransferencia);
     }
+
+    public void rendimento(int codigoConta, double valorRendimento) throws SQLException {
+        Conta conta = new Conta();
+        conta = new ContaDao().recover(codigoConta);
+        Operations.rendimento(conta, valorRendimento);
+    }
 }

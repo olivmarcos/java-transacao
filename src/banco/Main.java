@@ -46,7 +46,7 @@ public class Main {
 
         ContaCtrl ctrl = new ContaCtrl();
 
-        ctrl.transferencia(4, 1, 1000.00);
+        ctrl.rendimento(1, 0.35);
     }
 
 }

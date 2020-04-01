@@ -111,4 +111,32 @@ public class Operations {
             System.err.println("Não há saldo suficiente!");
         }
     }
+
+    public static void rendimento(Conta conta, double rendimento) {
+        Connection conn = Conexao.getConexaoTransacional();
+
+        try {
+            Extrato extrato = new Extrato();
+            extrato.setExt_descricao("Rendimento");
+            extrato.setExt_tipo("R");
+            extrato.setExt_valor(rendimento);
+            extrato.setExt_cod_conta(conta.getCnt_codigo());
+            extrato.setExt_data(new Date());
+
+            ExtratoDao extDao = new ExtratoDao(conn);
+            extDao.insert(extrato);
+
+            double valorRendimento = rendimento/100;
+            double valorARender = valorRendimento * conta.getCnt_saldo();
+            conta.setCnt_saldo(conta.getCnt_saldo() + valorARender);
+
+            ContaDao cntDao = new ContaDao(conn);
+            cntDao.update(conta);
+
+            conn.commit();
+            System.out.println("Rendeu mais " + rendimento + "% no mês!");
+        } catch (Exception e) {
+            System.err.println("Erro ao processar rendimento!:  " + e.getMessage());
+        }
+    }
 }
